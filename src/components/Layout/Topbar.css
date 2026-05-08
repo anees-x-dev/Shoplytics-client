@@ -1,0 +1,270 @@
+/* ══════════════════════════════════════════════
+   TOPBAR
+══════════════════════════════════════════════ */
+.topbar {
+  position: sticky;
+  top: 0;
+  height: 64px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 10px;
+  z-index: 90;
+  backdrop-filter: blur(12px);
+  /* prevent topbar from overflowing */
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;   /* allow children to shrink */
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  padding: 8px 7px;
+  flex-shrink: 0;
+}
+.ham-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-muted);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+.hamburger:hover .ham-line { background: var(--primary); }
+
+/* ── Icon button base ── */
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 15px;
+  position: relative;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.icon-btn:hover {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--primary);
+}
+
+/* ── Search bar ── */
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  cursor: pointer;
+  transition: var(--transition);
+  /* takes remaining space but doesn't overflow */
+  flex: 1;
+  min-width: 0;
+  max-width: 380px;
+  overflow: hidden;
+}
+.search-wrap:hover {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+.search-icon { color: var(--text-muted); font-size: 13px; flex-shrink: 0; }
+.search-fake {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.search-kbd {
+  font-size: 10px;
+  color: var(--text-light);
+  background: var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Notification dot ── */
+.notif-dot {
+  position: absolute;
+  top: 5px; right: 5px;
+  width: 8px; height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  pointer-events: none;
+}
+
+/* ── Notification dropdown ── */
+.notif-wrap { position: relative; }
+
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 310px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  z-index: 300;
+  overflow: hidden;
+  animation: dropIn .18s ease;
+}
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.notif-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+}
+.notif-clear {
+  font-size: 11px;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 500;
+  background: none;
+  border: none;
+}
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.notif-item:hover  { background: var(--surface2); }
+.notif-item.unread { background: rgba(37,99,235,.04); }
+.notif-item:last-child { border-bottom: none; }
+.notif-icon-wrap {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.notif-body { min-width: 0; }
+.notif-text { font-size: 12px; line-height: 1.4; color: var(--text); }
+.notif-time { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+
+/* ── Dark mode toggle ── */
+.dark-toggle {
+  width: 48px;
+  height: 26px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.dark-toggle.on { background: var(--primary); border-color: var(--primary); }
+.toggle-knob {
+  width: 18px; height: 18px;
+  background: var(--surface);
+  border-radius: 50%;
+  transition: var(--transition);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+}
+.dark-toggle.on .toggle-knob { transform: translateX(22px); }
+
+/* ── Avatar ── */
+.topbar-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  border: 2px solid var(--border);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.topbar-avatar:hover { border-color: var(--primary); }
+
+/* ══════════════════════════════════════════════
+   TOPBAR RESPONSIVE
+══════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .topbar { padding: 0 14px; gap: 8px; }
+  .search-kbd { display: none; }
+  .search-wrap { max-width: 220px; }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+  .topbar { padding: 0 10px; height: 56px; gap: 6px; }
+  .search-wrap { max-width: 150px; padding: 6px 10px; }
+  .search-fake { font-size: 12px; }
+  /* hide export button on small screens */
+  .hide-xs { display: none !important; }
+  /* notification dropdown: full width anchored to right edge of screen */
+  .notif-dropdown {
+    position: fixed;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    top: 66px;
+  }
+  .dark-toggle { width: 42px; height: 23px; }
+  .toggle-knob { width: 16px; height: 16px; font-size: 9px; }
+  .dark-toggle.on .toggle-knob { transform: translateX(19px); }
+  .topbar-avatar { width: 30px; height: 30px; font-size: 11px; }
+  .icon-btn { width: 32px; height: 32px; font-size: 13px; }
+}
+
+/* Very small — hide search entirely */
+@media (max-width: 380px) {
+  .search-wrap { display: none; }
+}

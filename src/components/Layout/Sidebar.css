@@ -1,0 +1,210 @@
+/* ══════════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════════ */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  /* width transition for collapse, transform for mobile slide */
+  transition: width .3s cubic-bezier(.4,0,.2,1),
+              transform .3s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+}
+
+/* Desktop collapse */
+.sidebar.collapsed { width: 68px; }
+
+/* Mobile: sidebar is off-canvas by default */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+    /* always full width on mobile regardless of collapsed state */
+    width: var(--sidebar-w) !important;
+    box-shadow: 4px 0 24px rgba(0,0,0,.18);
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   LOGO  — rounded-square SaaS card style
+   (same shape used by Stripe, Linear, Vercel)
+══════════════════════════════════════════════ */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px;
+  border-bottom: 1px solid var(--border);
+  min-height: 64px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* The rounded-square card wrapping the logo */
+.logo-card {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid rgba(37,99,235,.18);
+  box-shadow: 0 2px 8px rgba(37,99,235,.14), 0 0 0 1px rgba(37,99,235,.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+[data-theme="dark"] .logo-card {
+  background: linear-gradient(145deg, #1e3a5f 0%, #1e293b 100%);
+  border-color: rgba(37,99,235,.35);
+  box-shadow: 0 2px 8px rgba(37,99,235,.2), 0 0 0 1px rgba(37,99,235,.1);
+}
+.logo-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(37,99,235,.24);
+}
+
+.logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* Brand text next to logo */
+.logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity .2s, width .2s;
+}
+/* collapsed: hide text */
+.sidebar.collapsed .logo-text {
+  opacity: 0;
+  width: 0;
+}
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
+.sidebar-nav {
+  flex: 1;
+  padding: 10px 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.nav-section  { margin-bottom: 8px; }
+.nav-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  padding: 7px 10px 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity .2s;
+}
+.sidebar.collapsed .nav-label { opacity: 0; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 2px;
+}
+.nav-item:hover  { background: var(--surface2); color: var(--text); }
+.nav-item.active {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(37,99,235,.28);
+}
+
+.nav-icon {
+  width: 20px; height: 20px;
+  min-width: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.nav-text {
+  transition: opacity .2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .nav-text { opacity: 0; width: 0; }
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 99px;
+  min-width: 18px;
+  text-align: center;
+  transition: opacity .2s;
+  flex-shrink: 0;
+}
+.sidebar.collapsed .nav-badge { opacity: 0; }
+
+/* ══════════════════════════════════════════════
+   USER FOOTER
+══════════════════════════════════════════════ */
+.sidebar-footer {
+  padding: 10px 8px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  overflow: hidden;
+}
+.user-card:hover { background: var(--surface2); }
+.user-avatar {
+  width: 34px; height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  flex-shrink: 0;
+}
+.user-info { overflow: hidden; transition: opacity .2s; }
+.sidebar.collapsed .user-info { opacity: 0; width: 0; }
+.user-name { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.user-role { font-size: 11px; color: var(--text-muted); white-space: nowrap; }

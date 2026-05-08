@@ -1,0 +1,78 @@
+.cmd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(8px);
+  z-index: 500;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 16px 16px;
+  animation: fadeIn .15s ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.cmd-palette {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 540px;
+  max-height: 70vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp .15s ease;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+
+.cmd-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.cmd-search-icon { color: var(--text-muted); font-size: 17px; }
+.cmd-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+.cmd-input::placeholder { color: var(--text-light); }
+.cmd-esc {
+  font-size: 11px;
+  color: var(--text-light);
+  background: var(--surface2);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.cmd-results { overflow-y: auto; flex: 1; }
+.cmd-empty   { padding: 28px; text-align: center; color: var(--text-muted); font-size: 14px; }
+.cmd-section { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); padding: 10px 16px 4px; }
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cmd-item:hover, .cmd-item.selected { background: rgba(37,99,235,.08); }
+.cmd-item-icon  { width: 34px; height: 34px; border-radius: 8px; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.cmd-item-title { font-size: 14px; font-weight: 500; }
+.cmd-item-sub   { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+.cmd-item-kbd   { margin-left: auto; font-size: 11px; color: var(--text-light); background: var(--surface2); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+
+@media (max-width: 480px) {
+  .cmd-overlay  { padding: 40px 10px 10px; }
+  .cmd-item-kbd { display: none; }
+}

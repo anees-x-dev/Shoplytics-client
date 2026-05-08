@@ -1,0 +1,33 @@
+/* ── Product Grid Cards ── */
+.product-card { overflow: hidden; cursor: pointer; }
+
+.product-img {
+  height: 130px;
+  background: linear-gradient(135deg, var(--surface2), var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  position: relative;
+}
+.product-badge { position: absolute; top: 8px; right: 8px; }
+
+.product-body  { padding: 14px; }
+.product-name  { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+.product-cat   { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price { font-size: 15px; font-weight: 700; color: var(--primary); font-family: 'Poppins', sans-serif; }
+.product-stock { font-size: 11px; color: var(--text-muted); }
+
+/* Mobile: 2 columns */
+@media (max-width: 640px) {
+  .product-img  { height: 110px; font-size: 36px; }
+  .product-body { padding: 10px; }
+  .product-name { font-size: 12px; }
+  .product-price { font-size: 13px; }
+}
+
+/* Very small: 1 column */
+@media (max-width: 360px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
